@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(240, 240, 240);
+}
+
+.header {
+  background-color: white;
+  width: 100%;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.display {
+  margin: 30px;
+  text-align: center;
+  padding: 30px;
+  border: 3px solid gray;
+  border-radius: 10px;
+  color: red;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  background-color: gray;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.cell {
+  margin: 5px;
+  padding: 1em;
+  background-color: rgb(240, 240, 240);
+  border-radius: 20px;
+  font-size: 2em;
+}
+
+.cell:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.btn {
+  margin: 30px;
+  padding: 20px;
+  border: 2px solid gray;
+  border-radius: 30px;
+  color: blue;
+}
+
+.btn:hover {
+  background-color: gray;
+  color: white;
+}
+
+/* sticky footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 80%;
+}
+
+.footer a {
+  color: black;
+}

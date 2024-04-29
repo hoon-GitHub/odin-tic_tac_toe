@@ -38,6 +38,7 @@ const board = (function Gameboard() {
     }
   }
 
+  // checks if there's a winner (after each play)
   const checkWinner = () => {
 
     // check horizontal rows
