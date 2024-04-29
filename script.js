@@ -38,7 +38,38 @@ const board = (function Gameboard() {
     }
   }
 
-  return { getBoard, printBoard, resetBoard, mark };
+  const checkWinner = () => {
+
+    // check horizontal rows
+    if (board[0][0] === 1 && board[0][1] === 1 && board[0][2] === 1) return "PLAYER 1 WINS";
+    if (board[0][0] === 2 && board[0][1] === 2 && board[0][2] === 2) return "PLAYER 2 WINS";
+    if (board[1][0] === 1 && board[1][1] === 1 && board[1][2] === 1) return "PLAYER 1 WINS";
+    if (board[1][0] === 2 && board[1][1] === 2 && board[1][2] === 2) return "PLAYER 2 WINS";
+    if (board[2][0] === 1 && board[2][1] === 1 && board[2][2] === 1) return "PLAYER 1 WINS";
+    if (board[2][0] === 2 && board[2][1] === 2 && board[2][2] === 2) return "PLAYER 2 WINS";
+
+    // check vertical columns
+    if (board[0][0] === 1 && board[1][0] === 1 && board[2][0] === 1) return "PLAYER 1 WINS";
+    if (board[0][0] === 2 && board[1][0] === 2 && board[2][0] === 2) return "PLAYER 2 WINS";
+    if (board[0][1] === 1 && board[1][1] === 1 && board[2][1] === 1) return "PLAYER 1 WINS";
+    if (board[0][1] === 2 && board[1][1] === 2 && board[2][1] === 2) return "PLAYER 2 WINS";
+    if (board[0][2] === 1 && board[1][2] === 1 && board[2][2] === 1) return "PLAYER 1 WINS";
+    if (board[0][2] === 2 && board[1][2] === 2 && board[2][2] === 2) return "PLAYER 2 WINS";
+
+    // check diagonals
+    if (board[0][0] === 1 && board[1][1] === 1 && board[2][2] === 1) return "PLAYER 1 WINS";
+    if (board[0][0] === 2 && board[1][1] === 2 && board[2][2] === 2) return "PLAYER 2 WINS";
+    if (board[2][0] === 1 && board[1][1] === 1 && board[0][2] === 1) return "PLAYER 1 WINS";
+    if (board[2][0] === 2 && board[1][1] === 2 && board[0][2] === 2) return "PLAYER 2 WINS";
+
+    // no winner and reached 9 plays = draw
+    if (playCount === 9) return "DRAW";
+
+    // default - no winner and not yet reached 9 plays
+    return null;
+  }
+
+  return { getBoard, printBoard, resetBoard, mark, checkWinner };
 })();
 
 
@@ -70,12 +101,22 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
     let valid = board.mark(row, col, (activePlayer === player1 ? 1 : 2));
 
     if (valid) { // SUCCESS
-      activePlayer = (activePlayer === player1 ? player2 : player1); // swap active player
-      whoseTurn(); // display whose turn it is
+      let winner = board.checkWinner();
+      if (winner === null) {
+        activePlayer = (activePlayer === player1 ? player2 : player1); // swap active player
+        whoseTurn(); // display whose turn it is
+      } else {
+        console.warn(winner);
+        gameOver();
+      }
     } else { // ERROR
       console.warn("Please try again.");
       whoseTurn();
     }
+  }
+
+  const gameOver = () => {
+    console.warn("***** GAME OVER *****");
   }
 
   newGame(); // initial new game
