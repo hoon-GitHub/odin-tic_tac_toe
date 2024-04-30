@@ -99,14 +99,16 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
     board.resetBoard();
     activePlayer = player1;
     gameIsActive = true;
+
+    display.style.fontSize = '1em';
     display.innerText = `New game begins. ${player1} vs. ${player2}.`;
-    whoseTurn();
+    switchTurn();
   }
 
   newGameButton.addEventListener('click', newGame);
 
-  // function displays board and whose turn it is
-  const whoseTurn = () => {
+  // switch turns and indicate whose turn it is
+  const switchTurn = () => {
     if (activePlayer === player1) {
       DOM_players[1].classList.remove('selected');
       DOM_turn[1].style.visibility = 'hidden';
@@ -131,7 +133,8 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
         let winner = board.checkWinner();
         if (winner === null) {
           activePlayer = (activePlayer === player1 ? player2 : player1); // swap active player
-          whoseTurn(); // display whose turn it is
+          switchTurn(); // display whose turn it is
+          display.innerText = "Success";
         } else {
           display.innerText = winner;
           gameOver();
@@ -145,12 +148,13 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
   }
 
   const gameOver = () => {
+    display.style.fontSize = '1.5em';
     display.innerText += "\n*** GAME OVER ***";
     gameIsActive = false;
   }
 
   newGame(); // initial new game
-  
+
   // cell event listeners
   DOM_cells[0].addEventListener('click', () => { return play(0, 0) });
   DOM_cells[1].addEventListener('click', () => { return play(0, 1) });
@@ -162,5 +166,5 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
   DOM_cells[7].addEventListener('click', () => { return play(2, 1) });
   DOM_cells[8].addEventListener('click', () => { return play(2, 2) });
 
-  return { newGame, whoseTurn, play };
+  return { newGame, switchTurn, play };
 })();
