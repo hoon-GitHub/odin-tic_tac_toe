@@ -92,6 +92,7 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
   const newGameButton = document.querySelector('.newGameButton');
   const DOM_players = document.querySelectorAll('.playersInner');
   const DOM_turn = document.querySelectorAll('.playersTurn');
+  const DOM_cells = document.querySelectorAll('.cell');
   
   // new game - reset the game board and player
   const newGame = () => {
@@ -149,6 +150,17 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
   }
 
   newGame(); // initial new game
+  
+  // cell event listeners
+  DOM_cells[0].addEventListener('click', () => { return play(0, 0) });
+  DOM_cells[1].addEventListener('click', () => { return play(0, 1) });
+  DOM_cells[2].addEventListener('click', () => { return play(0, 2) });
+  DOM_cells[3].addEventListener('click', () => { return play(1, 0) });
+  DOM_cells[4].addEventListener('click', () => { return play(1, 1) });
+  DOM_cells[5].addEventListener('click', () => { return play(1, 2) });
+  DOM_cells[6].addEventListener('click', () => { return play(2, 0) });
+  DOM_cells[7].addEventListener('click', () => { return play(2, 1) });
+  DOM_cells[8].addEventListener('click', () => { return play(2, 2) });
 
   return { newGame, whoseTurn, play };
 })();

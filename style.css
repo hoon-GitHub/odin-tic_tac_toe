@@ -36,6 +36,7 @@ body {
   background-color: white;
   color: rgb(215, 78, 78);
   font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .container {
@@ -80,6 +81,7 @@ body {
   background-color: gray;
   padding: 5px;
   border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .cell {
@@ -99,13 +101,13 @@ body {
 }
 
 .btn {
-  margin: 30px;
-  padding: 20px;
+  margin-top: 50px;
+  padding: 30px;
   border: 2px solid gray;
   border-radius: 30px;
   color: rgb(50, 96, 141);
-  background-color: white;
   font-weight: bold;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .btn:hover {
