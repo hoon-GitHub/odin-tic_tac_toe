@@ -71,7 +71,7 @@ dialog form input {
 }
 
 .display {
-  margin: 30px;
+  margin: 50px;
   text-align: center;
   padding: 30px;
   border: 3px solid gray;
@@ -84,7 +84,7 @@ dialog form input {
 
 .container {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 0.5fr;
+  grid-template-columns: 0.6fr 1fr 0.6fr;
 }
 
 .players {

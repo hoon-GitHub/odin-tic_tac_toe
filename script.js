@@ -47,29 +47,29 @@ const board = (function Gameboard() {
   const checkWinner = () => {
 
     // check horizontal rows
-    if (board[0][0] === 'X' && board[0][1] === 'X' && board[0][2] === 'X') return "PLAYER 1 WINS!";
-    if (board[0][0] === 'O' && board[0][1] === 'O' && board[0][2] === 'O') return "PLAYER 2 WINS!";
-    if (board[1][0] === 'X' && board[1][1] === 'X' && board[1][2] === 'X') return "PLAYER 1 WINS!";
-    if (board[1][0] === 'O' && board[1][1] === 'O' && board[1][2] === 'O') return "PLAYER 2 WINS!";
-    if (board[2][0] === 'X' && board[2][1] === 'X' && board[2][2] === 'X') return "PLAYER 1 WINS!";
-    if (board[2][0] === 'O' && board[2][1] === 'O' && board[2][2] === 'O') return "PLAYER 2 WINS!";
+    if (board[0][0] === 'X' && board[0][1] === 'X' && board[0][2] === 'X') return "1";
+    if (board[0][0] === 'O' && board[0][1] === 'O' && board[0][2] === 'O') return "2";
+    if (board[1][0] === 'X' && board[1][1] === 'X' && board[1][2] === 'X') return "1";
+    if (board[1][0] === 'O' && board[1][1] === 'O' && board[1][2] === 'O') return "2";
+    if (board[2][0] === 'X' && board[2][1] === 'X' && board[2][2] === 'X') return "1";
+    if (board[2][0] === 'O' && board[2][1] === 'O' && board[2][2] === 'O') return "2";
 
     // check vertical columns
-    if (board[0][0] === 'X' && board[1][0] === 'X' && board[2][0] === 'X') return "PLAYER 1 WINS!";
-    if (board[0][0] === 'O' && board[1][0] === 'O' && board[2][0] === 'O') return "PLAYER 2 WINS!";
-    if (board[0][1] === 'X' && board[1][1] === 'X' && board[2][1] === 'X') return "PLAYER 1 WINS!";
-    if (board[0][1] === 'O' && board[1][1] === 'O' && board[2][1] === 'O') return "PLAYER 2 WINS!";
-    if (board[0][2] === 'X' && board[1][2] === 'X' && board[2][2] === 'X') return "PLAYER 1 WINS!";
-    if (board[0][2] === 'O' && board[1][2] === 'O' && board[2][2] === 'O') return "PLAYER 2 WINS!";
+    if (board[0][0] === 'X' && board[1][0] === 'X' && board[2][0] === 'X') return "1";
+    if (board[0][0] === 'O' && board[1][0] === 'O' && board[2][0] === 'O') return "2";
+    if (board[0][1] === 'X' && board[1][1] === 'X' && board[2][1] === 'X') return "1";
+    if (board[0][1] === 'O' && board[1][1] === 'O' && board[2][1] === 'O') return "2";
+    if (board[0][2] === 'X' && board[1][2] === 'X' && board[2][2] === 'X') return "1";
+    if (board[0][2] === 'O' && board[1][2] === 'O' && board[2][2] === 'O') return "2";
 
     // check diagonals
-    if (board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') return "PLAYER 1 WINS!";
-    if (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O') return "PLAYER 2 WINS!";
-    if (board[2][0] === 'X' && board[1][1] === 'X' && board[0][2] === 'X') return "PLAYER 1 WINS!";
-    if (board[2][0] === 'O' && board[1][1] === 'O' && board[0][2] === 'O') return "PLAYER 2 WINS!";
+    if (board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') return "1";
+    if (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O') return "2";
+    if (board[2][0] === 'X' && board[1][1] === 'X' && board[0][2] === 'X') return "1";
+    if (board[2][0] === 'O' && board[1][1] === 'O' && board[0][2] === 'O') return "2";
 
     // no winner and reached 9 plays = draw
-    if (playCount === 9) return "DRAW!";
+    if (playCount === 9) return "3";
 
     // default - no winner and not yet reached 9 plays
     return null;
@@ -150,9 +150,20 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
           activePlayer = (activePlayer === player1 ? player2 : player1); // swap active player
           switchTurn(); // display whose turn it is
           display.innerText = "Success";
+        } else if (winner === "1") {
+          display.style.fontSize = '1.5em';
+          display.innerText = `Game over! ${player1} wins!`;
+          gameIsActive = false;
+        } else if (winner === "2") {
+          display.style.fontSize = '1.5em';
+          display.innerText = `Game over! ${player2} wins!`;
+          gameIsActive = false;
+        } else if (winner === "3") {
+          display.style.fontSize = '1.5em';
+          display.innerText = `Game over! DRAW!`;
+          gameIsActive = false;
         } else {
-          display.innerText = winner;
-          gameOver();
+          return;
         }
       } else { // ERROR
         display.innerText = "Cell is already taken. Please try again.";
@@ -160,12 +171,6 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
     } else {
       return; // if game is not active, do nothing
     }
-  }
-
-  const gameOver = () => {
-    display.style.fontSize = '1.5em';
-    display.innerText += "\n*** GAME OVER ***";
-    gameIsActive = false;
   }
 
   newGame(); // initial new game
