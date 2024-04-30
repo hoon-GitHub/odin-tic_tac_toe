@@ -4,33 +4,38 @@
 */
 const board = (function Gameboard() {
   
-  // create a 3x3 board and a play counter
-  let board = [ [0, 0, 0], [0, 0, 0], [0, 0, 0] ];
+  // create the game board and a play counter
+  let board = [];
   let playCount = 0;
-
-  // function for getting the board
-  const getBoard = () => board;
-
-  // function for printing (in the console) the board
-  const printBoard = () => {
-    console.log(board[0][0], board[0][1], board[0][2]);
-    console.log(board[1][0], board[1][1], board[1][2]);
-    console.log(board[2][0], board[2][1], board[2][2], "Play count: " + playCount);
-  }
 
   // function for resetting the board
   const resetBoard = () => {
-    board = [ [0, 0, 0], [0, 0, 0], [0, 0, 0] ];
+    board = [ [' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' '] ];
     playCount = 0;
-    console.log("Game board has been reset.");
+    render();
+  }
+
+  // render the contents of game board
+  const render = () => {
+    const DOM_cells = document.querySelectorAll('.cell');
+    DOM_cells[0].innerText = board[0][0];
+    DOM_cells[1].innerText = board[0][1];
+    DOM_cells[2].innerText = board[0][2];
+    DOM_cells[3].innerText = board[1][0];
+    DOM_cells[4].innerText = board[1][1];
+    DOM_cells[5].innerText = board[1][2];
+    DOM_cells[6].innerText = board[2][0];
+    DOM_cells[7].innerText = board[2][1];
+    DOM_cells[8].innerText = board[2][2];
   }
 
   // marks a slot with the player's token (1 or 2)
   const mark = (row, col, player) => {
-    if (board[row][col] === 0) { // if the slot is empty
+    if (board[row][col] === ' ') { // if the slot is empty
       board[row][col] = player;
       console.log(`SUCCESS - mark ${player} placed in the slot [${row}][${col}].`);
       playCount++;
+      render();
       return true;
     } else { // if the slot is taken, display error message
       console.error("ERROR - slot already taken, select a different slot");
@@ -42,35 +47,35 @@ const board = (function Gameboard() {
   const checkWinner = () => {
 
     // check horizontal rows
-    if (board[0][0] === 1 && board[0][1] === 1 && board[0][2] === 1) return "PLAYER 1 WINS";
-    if (board[0][0] === 2 && board[0][1] === 2 && board[0][2] === 2) return "PLAYER 2 WINS";
-    if (board[1][0] === 1 && board[1][1] === 1 && board[1][2] === 1) return "PLAYER 1 WINS";
-    if (board[1][0] === 2 && board[1][1] === 2 && board[1][2] === 2) return "PLAYER 2 WINS";
-    if (board[2][0] === 1 && board[2][1] === 1 && board[2][2] === 1) return "PLAYER 1 WINS";
-    if (board[2][0] === 2 && board[2][1] === 2 && board[2][2] === 2) return "PLAYER 2 WINS";
+    if (board[0][0] === 'X' && board[0][1] === 'X' && board[0][2] === 'X') return "PLAYER 1 WINS!";
+    if (board[0][0] === 'O' && board[0][1] === 'O' && board[0][2] === 'O') return "PLAYER 2 WINS!";
+    if (board[1][0] === 'X' && board[1][1] === 'X' && board[1][2] === 'X') return "PLAYER 1 WINS!";
+    if (board[1][0] === 'O' && board[1][1] === 'O' && board[1][2] === 'O') return "PLAYER 2 WINS!";
+    if (board[2][0] === 'X' && board[2][1] === 'X' && board[2][2] === 'X') return "PLAYER 1 WINS!";
+    if (board[2][0] === 'O' && board[2][1] === 'O' && board[2][2] === 'O') return "PLAYER 2 WINS!";
 
     // check vertical columns
-    if (board[0][0] === 1 && board[1][0] === 1 && board[2][0] === 1) return "PLAYER 1 WINS";
-    if (board[0][0] === 2 && board[1][0] === 2 && board[2][0] === 2) return "PLAYER 2 WINS";
-    if (board[0][1] === 1 && board[1][1] === 1 && board[2][1] === 1) return "PLAYER 1 WINS";
-    if (board[0][1] === 2 && board[1][1] === 2 && board[2][1] === 2) return "PLAYER 2 WINS";
-    if (board[0][2] === 1 && board[1][2] === 1 && board[2][2] === 1) return "PLAYER 1 WINS";
-    if (board[0][2] === 2 && board[1][2] === 2 && board[2][2] === 2) return "PLAYER 2 WINS";
+    if (board[0][0] === 'X' && board[1][0] === 'X' && board[2][0] === 'X') return "PLAYER 1 WINS!";
+    if (board[0][0] === 'O' && board[1][0] === 'O' && board[2][0] === 'O') return "PLAYER 2 WINS!";
+    if (board[0][1] === 'X' && board[1][1] === 'X' && board[2][1] === 'X') return "PLAYER 1 WINS!";
+    if (board[0][1] === 'O' && board[1][1] === 'O' && board[2][1] === 'O') return "PLAYER 2 WINS!";
+    if (board[0][2] === 'X' && board[1][2] === 'X' && board[2][2] === 'X') return "PLAYER 1 WINS!";
+    if (board[0][2] === 'O' && board[1][2] === 'O' && board[2][2] === 'O') return "PLAYER 2 WINS!";
 
     // check diagonals
-    if (board[0][0] === 1 && board[1][1] === 1 && board[2][2] === 1) return "PLAYER 1 WINS";
-    if (board[0][0] === 2 && board[1][1] === 2 && board[2][2] === 2) return "PLAYER 2 WINS";
-    if (board[2][0] === 1 && board[1][1] === 1 && board[0][2] === 1) return "PLAYER 1 WINS";
-    if (board[2][0] === 2 && board[1][1] === 2 && board[0][2] === 2) return "PLAYER 2 WINS";
+    if (board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') return "PLAYER 1 WINS!";
+    if (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O') return "PLAYER 2 WINS!";
+    if (board[2][0] === 'X' && board[1][1] === 'X' && board[0][2] === 'X') return "PLAYER 1 WINS!";
+    if (board[2][0] === 'O' && board[1][1] === 'O' && board[0][2] === 'O') return "PLAYER 2 WINS!";
 
     // no winner and reached 9 plays = draw
-    if (playCount === 9) return "DRAW";
+    if (playCount === 9) return "DRAW!";
 
     // default - no winner and not yet reached 9 plays
     return null;
   }
 
-  return { getBoard, printBoard, resetBoard, mark, checkWinner };
+  return { resetBoard, render, mark, checkWinner };
 })();
 
 
@@ -79,45 +84,68 @@ const board = (function Gameboard() {
 */
 const game = (function gameController(player1 = "Player One", player2 = "Player Two") {
 
-  let activePlayer = player1; // player1 plays first
+  let activePlayer;
+  let gameIsActive;
 
+  // some DOM pointers
+  const display = document.querySelector('.display');
+  const newGameButton = document.querySelector('.newGameButton');
+  const DOM_players = document.querySelectorAll('.playersInner');
+  const DOM_turn = document.querySelectorAll('.playersTurn');
+  
   // new game - reset the game board and player
   const newGame = () => {
     board.resetBoard();
-    activePlayper = player1;
-    console.log(`New game begins. ${player1} vs. ${player2}.`);
+    activePlayer = player1;
+    gameIsActive = true;
+    display.innerText = `New game begins. ${player1} vs. ${player2}.`;
     whoseTurn();
   }
 
+  newGameButton.addEventListener('click', newGame);
+
   // function displays board and whose turn it is
   const whoseTurn = () => {
-    board.printBoard();
-    console.log(`** ${activePlayer}'s turn. **`);
+    if (activePlayer === player1) {
+      DOM_players[1].classList.remove('selected');
+      DOM_turn[1].style.visibility = 'hidden';
+      DOM_players[0].classList.add('selected');
+      DOM_turn[0].style.visibility = '';
+    } else {
+      DOM_players[0].classList.remove('selected');
+      DOM_turn[0].style.visibility = 'hidden';
+      DOM_players[1].classList.add('selected');
+      DOM_turn[1].style.visibility = '';
+    }
   }
 
   // function plays a turn for the active player
   const play = (row, col) => {
 
-    // tries to play a turn, and check for validity
-    let valid = board.mark(row, col, (activePlayer === player1 ? 1 : 2));
+    if (gameIsActive) {
+      // tries to play a turn, and check for validity
+      let valid = board.mark(row, col, (activePlayer === player1 ? 'X' : 'O'));
 
-    if (valid) { // SUCCESS
-      let winner = board.checkWinner();
-      if (winner === null) {
-        activePlayer = (activePlayer === player1 ? player2 : player1); // swap active player
-        whoseTurn(); // display whose turn it is
-      } else {
-        console.warn(winner);
-        gameOver();
+      if (valid) { // SUCCESS
+        let winner = board.checkWinner();
+        if (winner === null) {
+          activePlayer = (activePlayer === player1 ? player2 : player1); // swap active player
+          whoseTurn(); // display whose turn it is
+        } else {
+          display.innerText = winner;
+          gameOver();
+        }
+      } else { // ERROR
+        display.innerText = "Cell is already taken. Please try again.";
       }
-    } else { // ERROR
-      console.warn("Please try again.");
-      whoseTurn();
+    } else {
+      return; // if game is not active, do nothing
     }
   }
 
   const gameOver = () => {
-    console.warn("***** GAME OVER *****");
+    display.innerText += "\n*** GAME OVER ***";
+    gameIsActive = false;
   }
 
   newGame(); // initial new game

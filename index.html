@@ -20,24 +20,32 @@
   <div class="header">
     <h1>Tic Tac Toe</h1>
   </div>
-
   <!-- main body section -->
   <div class="main">
     <div class="display">Display</div>
-    <div class="board">
-      <div class="cell">00</div>
-      <div class="cell">01</div>
-      <div class="cell">02</div>
-      <div class="cell">10</div>
-      <div class="cell">11</div>
-      <div class="cell">12</div>
-      <div class="cell">20</div>
-      <div class="cell">21</div>
-      <div class="cell">22</div>
+    <div class="container">
+      <div class="players">
+        <div class="playersInner"><p class="mark">X</p><p>Player One</p></div>
+        <div class="playersTurn">TURN</div>
+      </div>
+      <div class="board">
+        <div class="cell" id="00"></div>
+        <div class="cell" id="01"></div>
+        <div class="cell" id="02"></div>
+        <div class="cell" id="10"></div>
+        <div class="cell" id="11"></div>
+        <div class="cell" id="12"></div>
+        <div class="cell" id="20"></div>
+        <div class="cell" id="21"></div>
+        <div class="cell" id="22"></div>
+      </div>
+      <div class="players">
+        <div class="playersInner"><p class="mark">O</p><p>Player Two</p></div>
+        <div class="playersTurn">TURN</div>
+      </div>
     </div>
-    <button class="btn">New Game</button>
+    <button class="btn newGameButton">New Game</button>
   </div>
-
   <!-- footer section -->
   <div class="footer">
     <p>Copyright © <a href="https://github.com/hoon-GitHub" target="_blank">hoon-GitHub
