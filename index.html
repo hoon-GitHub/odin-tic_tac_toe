@@ -22,10 +22,10 @@
   </div>
   <!-- main body section -->
   <div class="main">
-    <div class="display"></div>
+    <div class="display">DISPLAY</div>
     <div class="container">
       <div class="players">
-        <div class="playersInner"><p class="mark">X</p><p>Player One</p></div>
+        <div class="playersInner"><p class="mark">X</p><p id="p1name">Player One</p></div>
         <div class="playersTurn">TURN</div>
       </div>
       <div class="board">
@@ -40,17 +40,27 @@
         <div class="cell" id="22"></div>
       </div>
       <div class="players">
-        <div class="playersInner"><p class="mark">O</p><p>Player Two</p></div>
+        <div class="playersInner"><p class="mark">O</p><p id="p2name">Player Two</p></div>
         <div class="playersTurn">TURN</div>
       </div>
     </div>
-    <button class="btn newGameButton">New Game</button>
+    <button class="btn newGameButton">NEW GAME</button>
   </div>
   <!-- footer section -->
   <div class="footer">
     <p>Copyright © <a href="https://github.com/hoon-GitHub" target="_blank">
       hoon-GitHub<i class="fa-brands fa-github"></i></a></p>
   </div>
+  <!-- Modal dialog for player names -->
+  <dialog>
+    <form>
+        <label>Player1 Name</label>
+        <input id="player1" type="text">
+        <label>Player2 Name</label>
+        <input id="player2" type="text">
+        <button id="play">Play!</button>
+    </form>
+  </dialog>
 
   <script src="script.js"></script>
 

@@ -85,7 +85,7 @@ const board = (function Gameboard() {
 const game = (function gameController(player1 = "Player One", player2 = "Player Two") {
 
   let activePlayer;
-  let gameIsActive;
+  let gameIsActive = false;
 
   // some DOM pointers
   const display = document.querySelector('.display');
@@ -93,16 +93,31 @@ const game = (function gameController(player1 = "Player One", player2 = "Player 
   const DOM_players = document.querySelectorAll('.playersInner');
   const DOM_turn = document.querySelectorAll('.playersTurn');
   const DOM_cells = document.querySelectorAll('.cell');
+  const playerNamesDialog = document.querySelector('dialog');
+  const playButton = document.querySelector('#play');
   
-  // new game - reset the game board and player
+  // new game - get player names and reset the game board
   const newGame = () => {
-    board.resetBoard();
-    activePlayer = player1;
-    gameIsActive = true;
+    playerNamesDialog.showModal();
+    playButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const p1 = document.getElementById('player1');
+      const p2 = document.getElementById('player2');
+      player1 = (p1.value === "" ? "Player One" : p1.value);
+      player2 = (p2.value === "" ? "Player Two" : p2.value);
+      display.style.fontSize = '1em';
+      display.innerText = `New game begins. ${player1} vs. ${player2}.`;
+      const p1nameDP = document.getElementById('p1name');
+      const p2nameDP = document.getElementById('p2name');
+      p1nameDP.innerText = player1;
+      p2nameDP.innerText = player2;
+      playerNamesDialog.close();
 
-    display.style.fontSize = '1em';
-    display.innerText = `New game begins. ${player1} vs. ${player2}.`;
-    switchTurn();
+      board.resetBoard();
+      activePlayer = player1;
+      switchTurn();
+      gameIsActive = true;
+    });
   }
 
   newGameButton.addEventListener('click', newGame);
